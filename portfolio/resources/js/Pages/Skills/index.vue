@@ -67,8 +67,3 @@ defineProps({
     skills: Object,
 });
 </script>
-<style>
-.custom-background {
-    background-color: white !important;
-}
-</style>
