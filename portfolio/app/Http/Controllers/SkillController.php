@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\skillResource;
 use App\Models\Skill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -14,7 +15,9 @@ class SkillController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Skills/index');
+        $skills=skillResource::collection(Skill::all());
+
+        return Inertia::render('Skills/index',compact('skills'));
     }
 
     /**
