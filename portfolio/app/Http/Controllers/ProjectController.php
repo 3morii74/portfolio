@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Skill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class ProjectController extends Controller
@@ -16,8 +17,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects= ProjectResource::collection(Project::with('skill')->get());
-        return Inertia::render('Projects/index',compact('projects'));
+        $projects = ProjectResource::collection(Project::with('skill')->get());
+        return Inertia::render('Projects/index', compact('projects'));
     }
 
     /**
@@ -53,35 +54,56 @@ class ProjectController extends Controller
         return Redirect::back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Project $project)
     {
-        //
+        $skills = Skill::all();
+        return Inertia::render('Projects/edit', compact('project', 'skills'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Project $project)
     {
-        //
+
+        $image = $project->image;
+        $request->validate([
+
+            'name' => ['required', 'min:3'],
+            'skill_id' => ['required']
+
+        ]);
+
+        if ($request->hasFile('image')) {
+          
+                Storage::delete($project->image);
+            
+
+            $image = $request->file('image')->store('projects');
+        }
+
+        $project->update([
+            'name' => $request->name,
+            'skill_id' => $request->skill_id,
+            'project_url' => $request->project_url,
+            'image' => $image
+        ]);
+        return Redirect::route('projects.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(  Project $project)
     {
-        //
+        Storage::delete($project->image);
+        $project->delete();
+        return Redirect::back();
+
     }
 }
