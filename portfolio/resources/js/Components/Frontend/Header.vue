@@ -18,9 +18,9 @@ const showMobileMenu = ref("false");
       class="container flex flex-wrap justify-between items-center mx-auto"
       bis_skin_checked="1"
     >
-      <a href="https://flowbite.com/" class="flex items-center">
+      <a href="https://github.com/3morii74" class="flex items-center">
         <img
-          src="https://flowbite.com/docs/images/logo.svg"
+          src="https://github.com/3morii74/portfolio/blob/main/OO.png?raw=true"
           class="mr-3 h-6 sm:h-9"
           alt="Flowbite Logo"
         />
@@ -32,7 +32,7 @@ const showMobileMenu = ref("false");
             whitespace-nowrap
             dark:text-white
           "
-          >Flowbite</span
+          >3MORII</span
         >
       </a>
       <button
