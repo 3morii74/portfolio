@@ -22,7 +22,7 @@ const showMobileMenu = ref("false");
         <img
           src="https://github.com/3morii74/portfolio/blob/main/OO.png?raw=true"
           class="mr-3 h-6 sm:h-9"
-          alt="Flowbite Logo"
+          alt="Laraveller Logo"
         />
         <span
           class="
