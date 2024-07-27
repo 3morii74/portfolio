@@ -5,7 +5,7 @@ defineProps({
 });
 </script>
 <template>
-  <Link
+  <a
     :href="project.project_url"
     class="group flex flex-col items-center text-center cursor-pointer"
   >
@@ -32,5 +32,5 @@ defineProps({
     >
       {{ project.name }}
     </h3>
-  </Link>
+  </a>
 </template>
