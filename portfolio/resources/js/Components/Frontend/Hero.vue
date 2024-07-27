@@ -101,7 +101,7 @@
                 >
                     <img
                         class="rounded-lg"
-                        src="https://scontent.fcai19-7.fna.fbcdn.net/v/t39.30808-6/450559652_2745879958905113_7244495243180391719_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHgFJR655hOT98rfHwiDPjFgoctqUh6E2aChy2pSHoTZtN5x-tpf-8eCkb5u9-J_yWwTwPjmcxMkQkgBqPHaIRZ&_nc_ohc=eizU4A8KQbMQ7kNvgFip-Pa&_nc_ht=scontent.fcai19-7.fna&oh=00_AYBMV_PUsMIrJbSp9vnV-C4DGbLQkI6SLzPDVkg63O27Mg&oe=669F5606"
+                        src="https://github.com/3morii74/portfolio/blob/main/450559652_2745879958905113_7244495243180391719_n.jpg?raw=true"
                         alt="Hero"
                     />
                 </div>
