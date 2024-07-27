@@ -22,7 +22,12 @@ const filterProjects = (id) => {
 };
 </script>
 <template>
-  <div class="container mx-auto">
+  <div class="container mx-auto" v-motion :initial="{opacity:0,
+    y:100,
+    }"
+    :visible="{opacity:1,
+      y:0,
+    }">
     <nav class="mb-12 border-b-2 border-light-tail-100 dark:text-dark-navy-100">
       <ul class="flex flex-col lg:flex-row justify-evenly items-center">
         <li class="cursor-pointer capitalize m-4">

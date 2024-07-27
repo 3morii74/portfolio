@@ -1,5 +1,10 @@
 <template>
-  <div class="bg-light-tail-100 dark:bg-dark-navy-500">
+  <div class="bg-light-tail-100 dark:bg-dark-navy-500" v-motion :initial="{opacity:0,
+    y:100,
+    }"
+    :visible="{opacity:1,
+      y:0,
+    }" >
     <div
       class="
         container
