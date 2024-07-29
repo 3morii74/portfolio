@@ -1,6 +1,7 @@
 <script setup>
 import Project from "./Project.vue";
-import { ref } from "vue";
+import { ref, watch } from "vue";
+
 const props = defineProps({
   skills: Object,
   projects: Object,
@@ -9,25 +10,31 @@ const props = defineProps({
 const filteredProjects = ref(props.projects.data);
 const selectedSkill = ref("all");
 
+// Watch for changes to the selectedSkill and update filteredProjects accordingly
+watch(selectedSkill, (newSkill) => {
+  filterProjects(newSkill);
+});
+
 const filterProjects = (id) => {
+  console.log('Filtering projects for skill id:', id);
+  
   if (id === "all") {
     filteredProjects.value = props.projects.data;
-    selectedSkill.value = id;
   } else {
     filteredProjects.value = props.projects.data.filter((project) => {
-      return project.skill.id === id;
+      console.log('Project:', project);
+      const hasSkill = project.skills.some((skill) => skill.id === id);
+      console.log('Has skill:', hasSkill);
+      return hasSkill;
     });
-    selectedSkill.value = id;
   }
+  
+  selectedSkill.value = id;
 };
 </script>
+
 <template>
-  <div class="container mx-auto" v-motion :initial="{opacity:0,
-    y:100,
-    }"
-    :visible="{opacity:1,
-      y:0,
-    }">
+  <div class="container mx-auto" v-motion :initial="{opacity:0, y:100,}" :visible="{opacity:1, y:0,}">
     <nav class="mb-12 border-b-2 border-light-tail-100 dark:text-dark-navy-100">
       <ul class="flex flex-col lg:flex-row justify-evenly items-center">
         <li class="cursor-pointer capitalize m-4">

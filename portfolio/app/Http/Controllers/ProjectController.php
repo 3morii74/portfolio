@@ -19,8 +19,13 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = ProjectResource::collection(Project::with('skill')->get());
-        return Inertia::render('Projects/Index', compact('projects'));
+        // Correct the relationship name to 'skills'
+        $projects = ProjectResource::collection(Project::with('skills')->paginate(100)); // Use 'skills' if many-to-many, or 'skill' if one-to-many
+
+        return Inertia::render('Projects/Index', [
+            'projects' => $projects,
+
+        ]);
     }
 
     /**
@@ -45,22 +50,29 @@ class ProjectController extends Controller
         $request->validate([
             'image' => ['required', 'image'],
             'name' => ['required', 'min:3'],
-            'skill_id' => ['required']
+            'skill_id' => ['required', 'array'], // Validate as an array
+            'skill_id.*' => ['exists:skills,id'], // Validate each item in the array
         ]);
 
         if ($request->hasFile('image')) {
             $image = $request->file('image')->store('projects');
-            Project::create([
-                'skill_id' => $request->skill_id,
+
+            $project = Project::create([
                 'name' => $request->name,
                 'image' => $image,
                 'project_url' => $request->project_url
             ]);
 
+            // Attach skills to the project
+            $project->skills()->attach($request->skill_id);
+
             return Redirect::route('projects.index')->with('message', 'Project created successfully.');
         }
+
         return Redirect::back();
     }
+
+
 
     /**
      * Show the form for editing the specified resource.

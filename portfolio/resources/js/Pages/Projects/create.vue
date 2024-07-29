@@ -1,5 +1,5 @@
 <template>
-  <Head title="New Project  " />
+  <Head title="New Project" />
   <BreezeAuthenticatedLayout>
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -11,29 +11,19 @@
       <div class="max-w-md mx-auto sm:px-6 lg:px-8 bg-white">
         <form class="p-4" @submit.prevent="submit">
           <div>
-            <BreezeLabel for="skill_id" value="Skill" />
-            <select
-              v-model="form.skill_id"
-              id="skill_id"
-              name="skill_id"
-              class="
-                mt-1
-                block
-                w-full
-                pl-3
-                pr-10
-                py-2
-                text-base
-                border-gray-300
-                focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
-                sm:text-sm
-                rounded-md
-              "
-            >
-              <option v-for="skill in skills" :key="skill.id" :value="skill.id">
-                {{ skill.name }}
-              </option>
-            </select>
+            <BreezeLabel for="skill_id" value="Skills" />
+            <div class="mt-2">
+              <div v-for="skill in skills" :key="skill.id" class="flex items-center">
+                <input
+                  type="checkbox"
+                  :id="'skill-' + skill.id"
+                  :value="skill.id"
+                  v-model="form.skill_id"
+                  class="mr-2"
+                />
+                <label :for="'skill-' + skill.id">{{ skill.name }}</label>
+              </div>
+            </div>
             <BreezeInputError class="mt-2" :message="form.errors.skill_id" />
           </div>
           <div>
@@ -99,7 +89,7 @@ defineProps({
 const form = useForm({
   name: "",
   image: null,
-  skill_id: "",
+  skill_id: [], // Initialize as an array to handle multiple selections
   project_url: "",
 });
 

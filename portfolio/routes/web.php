@@ -19,14 +19,14 @@ use Illuminate\Support\Facades\Mail;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/send-test-email', function () {
-    Mail::raw('This is a test email.', function ($message) {
-        $message->to('omerahmed200237@gmail.com')
-                ->subject('Test Email');
-    });
+// Route::get('/send-test-email', function () {
+//     Mail::raw('This is a test email.', function ($message) {
+//         $message->to('omerahmed200237@gmail.com')
+//                 ->subject('Test Email');
+//     });
 
-    return 'Email sent!';
-});
+//     return 'Email sent!';
+// });
 
 Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
 Route::post('/contact', ContactController::class)->name('contact');

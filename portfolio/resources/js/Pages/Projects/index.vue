@@ -20,8 +20,7 @@
               text-white
               rounded-md
             "
-            >New Project</Link
-          >
+          >New Project</Link>
         </div>
         <div class="overflow-x-auto relative">
           <table
@@ -38,7 +37,7 @@
               <tr>
                 <th scope="col" class="py-3 px-6">ID</th>
                 <th scope="col" class="py-3 px-6">Name</th>
-                <th scope="col" class="py-3 px-6">Skill</th>
+                <th scope="col" class="py-3 px-6">Skills</th>
                 <th scope="col" class="py-3 px-6">Image</th>
                 <th scope="col" class="py-3 px-6"></th>
               </tr>
@@ -63,7 +62,12 @@
                   {{ project.id }}
                 </th>
                 <td class="py-4 px-6">{{ project.name }}</td>
-                <td class="py-4 px-6">{{ project.skill.name }}</td>
+                <td class="py-4 px-6">
+                  <!-- Loop through skills if many-to-many -->
+                  <div v-for="skill in project.skills" :key="skill.id">
+                    {{ skill.name }},
+                  </div>
+                </td>
                 <td class="py-4 px-6">
                   <img :src="project.image" class="w-12 h-12 rounded-full" />
                 </td>
@@ -71,16 +75,14 @@
                   <Link
                     :href="route('projects.edit', project.id)"
                     class="font-medium text-blue-500 hover:text-blue-700 mr-2"
-                    >Edit</Link
-                  >
+                  >Edit</Link>
                   <Link
                     :href="route('projects.destroy', project.id)"
                     method="delete"
                     as="button"
                     type="button"
                     class="font-medium text-red-500 hover:text-red-700 mr-2"
-                    >Delete</Link
-                  >
+                  >Delete</Link>
                 </td>
               </tr>
             </tbody>
