@@ -7,6 +7,7 @@ use App\Http\Controllers\WelcomeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,14 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/send-test-email', function () {
+    Mail::raw('This is a test email.', function ($message) {
+        $message->to('omerahmed200237@gmail.com')
+                ->subject('Test Email');
+    });
+
+    return 'Email sent!';
+});
 
 Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
 Route::post('/contact', ContactController::class)->name('contact');
