@@ -29,8 +29,12 @@ class ContactController extends Controller
         }
 
         // Sending the email
-        Mail::to('omerahmed200237@gmail.com')->send(new ContactMail($name, $email, $body));
-
+        try {
+            Mail::to('omerahmed200237@gmail.com')->send(new ContactMail($name, $email, $body));
+        } catch (\Exception $e) {
+            Log::error('Mail sending failed: ' . $e->getMessage());
+            return redirect()->back()->withErrors(['error' => 'Failed to send email. Please try again later.']);
+        }
         // Redirecting back with success message
         return redirect()->back()->with('success', 'Your message has been sent successfully!');
     }
