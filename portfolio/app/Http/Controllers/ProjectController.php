@@ -98,7 +98,9 @@ class ProjectController extends Controller
         $image = $project->image;
         $request->validate([
             'name' => ['required', 'min:3'],
-            'skill_id' => ['required']
+           'skill_id' => ['required', 'array'], // Validate as an array
+            'skill_id.*' => ['exists:skills,id'], // Validate each item in the array
+    
         ]);
         if ($request->hasFile('image')) {
             Storage::delete($project->image);
@@ -107,10 +109,11 @@ class ProjectController extends Controller
 
         $project->update([
             'name' => $request->name,
-            'skill_id' => $request->skill_id,
             'project_url' => $request->project_url,
             'image' => $image
         ]);
+         // Attach skills to the project
+         $project->skills()->attach($request->skill_id);
         return Redirect::route('projects.index')->with('message', 'Project updated successfully.');
     }
 

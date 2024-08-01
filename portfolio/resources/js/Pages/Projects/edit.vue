@@ -11,33 +11,20 @@
       <div class="max-w-md mx-auto sm:px-6 lg:px-8 bg-white">
         <form class="p-4" @submit.prevent="submit">
           <div>
-            <BreezeLabel for="skill_id" value="Skill" />
-            <select
-              v-model="form.skill_id"
-              id="skill_id"
-              name="skill_id"
-              class="
-                mt-1
-                block
-                w-full
-                pl-3
-                pr-10
-                py-2
-                text-base
-                border-gray-300
-                focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
-                sm:text-sm
-                rounded-md
-              "
-            >
-              <option v-for="skill in skills" :key="skill.id" :value="skill.id">
-                {{ skill.name }}
-              </option>
-              <BreezeInputError
-                class="mt-2"
-                :message="$page.props.errors.skill_id"
-              />
-            </select>
+            <BreezeLabel for="skill_id" value="Skills" />
+            <div class="mt-2">
+              <div v-for="skill in skills" :key="skill.id" class="flex items-center">
+                <input
+                  type="checkbox"
+                  :id="'skill-' + skill.id"
+                  :value="skill.id"
+                  v-model="form.skill_id"
+                  class="mr-2"
+                />
+                <label :for="'skill-' + skill.id">{{ skill.name }}</label>
+              </div>
+            </div>
+            <BreezeInputError class="mt-2" :message="form.errors.skill_id" />
           </div>
           <div>
             <BreezeLabel for="name" value="Name" />
@@ -102,10 +89,10 @@ const props = defineProps({
 });
 
 const form = useForm({
-  name: props.project?.name,
+  name: "",
   image: null,
-  skill_id: props.project?.skill_id,
-  project_url: props.project?.project_url,
+  skill_id: [], // Initialize as an array to handle multiple selections
+  project_url: "",
 });
 
 const submit = () => {
