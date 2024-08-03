@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\DB;
 
 class SkillController extends Controller
 {
@@ -18,7 +20,8 @@ class SkillController extends Controller
      */
     public function index()
     {
-        $skills = SkillResource::collection(Skill::all());
+        // Fetch only necessary columns to save memory
+        $skills = SkillResource::collection(Skill::select('id', 'name', 'image')->get());
         return Inertia::render('Skills/Index', compact('skills'));
     }
 
@@ -40,27 +43,35 @@ class SkillController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'image' => ['required', 'image'],
             'name' => ['required', 'min:3']
         ]);
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image')->store('skills');
-            Skill::create([
-                'name' => $request->name,
-                'image' => $image
-            ]);
+        DB::transaction(function () use ($validated, $request) {
+            $image = Image::make($request->file('image'))
+                ->resize(100, 75, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })
+                ->encode('png', 5);  // Save as PNG to preserve transparency
 
-            return Redirect::route('skills.index')->with('message', 'Skill created successfully.');
-        }
-        return Redirect::back();
+            $imagePath = 'skills/' . uniqid() . '.png';
+            Storage::put($imagePath, (string) $image);
+
+            Skill::create([
+                'name' => $validated['name'],
+                'image' => $imagePath
+            ]);
+        });
+
+        return Redirect::route('skills.index')->with('message', 'Skill created successfully.');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Skill  $skill
      * @return \Illuminate\Http\Response
      */
     public function edit(Skill $skill)
@@ -72,24 +83,37 @@ class SkillController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Skill  $skill
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Skill $skill)
     {
-        $image = $skill->image;
-        $request->validate([
+        $validated = $request->validate([
             'name' => ['required', 'min:3']
         ]);
-        if ($request->hasFile('image')) {
-            Storage::delete($skill->image);
-            $image = $request->file('image')->store('skills');
-        }
 
-        $skill->update([
-            'name' => $request->name,
-            'image' => $image
-        ]);
+        DB::transaction(function () use ($validated, $request, $skill) {
+            $imagePath = $skill->image;
+
+            if ($request->hasFile('image')) {
+                Storage::delete($imagePath);
+
+                $image = Image::make($request->file('image'))
+                    ->resize(100, 75, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    })
+                    ->encode('png', 5);  // Save as PNG to preserve transparency
+
+                $imagePath = 'skills/' . uniqid() . '.png';
+                Storage::put($imagePath, (string) $image);
+            }
+
+            $skill->update([
+                'name' => $validated['name'],
+                'image' => $imagePath
+            ]);
+        });
 
         return Redirect::route('skills.index')->with('message', 'Skill updated successfully.');
     }
@@ -97,13 +121,15 @@ class SkillController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Skill  $skill
      * @return \Illuminate\Http\Response
      */
     public function destroy(Skill $skill)
     {
-        Storage::delete($skill->image);
-        $skill->delete();
+        DB::transaction(function () use ($skill) {
+            Storage::delete($skill->image);
+            $skill->delete();
+        });
 
         return Redirect::back()->with('message', 'Skill deleted successfully.');
     }
