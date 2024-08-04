@@ -48,7 +48,7 @@ watch(selectedSkill, () => {
 
 <template>
   <div class="container mx-auto" v-motion :initial="{opacity:0, y:100,}" :visible="{opacity:1, y:0,}">
-    <nav class="mb-12 border-b-2 border-light-tail-100 text-dark-navy-100">
+    <nav class="mb-12 text-dark-navy-100">
       <!-- Dropdown for mobile -->
       <div class="block lg:hidden relative">
         <button @click="showDropdown = !showDropdown" class="bg-dark-navy-100 text-white px-4 py-2 rounded-md w-full text-left">
@@ -89,8 +89,8 @@ watch(selectedSkill, () => {
       </div>
 
       <!-- List for larger screens -->
-      <ul class="hidden lg:flex flex-wrap justify-center lg:justify-evenly items-center space-y-4 lg:space-y-0 lg:space-x-4">
-        <li class="cursor-pointer capitalize">
+      <ul class="hidden lg:flex flex-wrap justify-center lg:justify-evenly items-center custom-space">
+        <li class="cursor-pointer capitalize custom-margin">
           <button
             @click="filterProjects('all')"
             class="
@@ -112,7 +112,7 @@ watch(selectedSkill, () => {
           </button>
         </li>
         <li
-          class="cursor-pointer capitalize"
+          class="cursor-pointer capitalize custom-margin"
           v-for="projectSkill in skills.data"
           :key="projectSkill.id"
         >
@@ -137,6 +137,7 @@ watch(selectedSkill, () => {
           </button>
         </li>
       </ul>
+      <br>
     </nav>
 
     <section class="grid gap-y-12 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
@@ -149,3 +150,43 @@ watch(selectedSkill, () => {
   </div>
 </template>
 
+<style scoped>
+.custom-space {
+  margin-left: -2px;
+  margin-right: -2px;
+}
+
+.custom-margin {
+  margin-left: 2px;
+  margin-right: 2px;
+  margin-bottom: 2px;
+}
+
+/* For smaller screens */
+@media (max-width: 1023px) {
+  .custom-space {
+    margin-left: -1px;
+    margin-right: -1px;
+  }
+
+  .custom-margin {
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-bottom: 1px;
+  }
+}
+
+/* For larger screens */
+@media (min-width: 1024px) {
+  .custom-space {
+    margin-left: -4px;
+    margin-right: -4px;
+  }
+
+  .custom-margin {
+    margin-left: -2%;
+    margin-right: -2%;
+    margin-bottom: 4px;
+  }
+}
+</style>
