@@ -1,5 +1,5 @@
 <template>
-  <section id="about" class="section bg-light-secondary dark:bg-dark-secondary">
+  <section id="about" class="section bg-dark-secondary">
     <div class="container mx-auto" v-motion :initial="{opacity:0,
     y:100,
     }"
@@ -25,7 +25,7 @@
               About Me
             </h2>
             <P class="mb-4 text-accent">Freelance frontend Web developer</P>
-            <hr class="mb-8 opacity-90 dark:opacity-5" />
+            <hr class="mb-8 opacity-90 " />
             <p class="mb-8">
               Lorem ipsum dolor sit amet consectetur adipisicing elit tempore
               earum dolorum quo consequatur rem nihil hic ducimus rerum soluta
@@ -36,7 +36,7 @@
               cupiditate ratione esse maxime eum recusandae ducimus.
             </p>
           </div>
-          <a href="#contact" class="btn btn-md bg-accent text-light-tail-100">
+          <a href="#contact" class="btn btn-md bg-accent text-white">
             Contact me
           </a>
         </div>

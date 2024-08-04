@@ -28,7 +28,7 @@ const submit = () => {
 };
 </script>
 <template>
-  <section id="contact" class="section bg-light-primary dark:bg-dark-primary">
+  <section id="contact" class="section bg-dark-primary">
     <div class="container mx-auto" v-motion :initial="{opacity:0,
     y:100,
     }"
@@ -138,8 +138,7 @@ const submit = () => {
             class="
               m-2
               p-4
-              bg-light-tail-500
-              dark:bg-dark-navy-100
+            bg-dark-navy-100
               text-light-secondary
               rounded-lg
             "

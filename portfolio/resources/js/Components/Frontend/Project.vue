@@ -19,7 +19,7 @@ defineProps({
     </div>
     <h3
       class="
-        group-hover:text-light-tail-500
+        group-hover:text-light-tail-100
         text-2xl
         font-semibold
         capitalize

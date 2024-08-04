@@ -48,22 +48,22 @@ watch(selectedSkill, () => {
 
 <template>
   <div class="container mx-auto" v-motion :initial="{opacity:0, y:100,}" :visible="{opacity:1, y:0,}">
-    <nav class="mb-12 border-b-2 border-light-tail-100 dark:text-dark-navy-100">
+    <nav class="mb-12 border-b-2 border-light-tail-100 text-dark-navy-100">
       <!-- Dropdown for mobile -->
       <div class="block lg:hidden relative">
-        <button @click="showDropdown = !showDropdown" class="bg-light-tail-500 dark:bg-dark-navy-100 text-white px-4 py-2 rounded-md w-full text-left">
+        <button @click="showDropdown = !showDropdown" class="bg-dark-navy-100 text-white px-4 py-2 rounded-md w-full text-left">
           {{ selectedSkillName }}
           <span class="float-right">&#x25BC;</span>
         </button>
-        <ul v-if="showDropdown" class="absolute bg-white dark:bg-dark-navy-500 w-full rounded-md mt-2 z-10 shadow-lg">
+        <ul v-if="showDropdown" class="absolute bg-dark-navy-500 w-full rounded-md mt-2 z-10 shadow-lg">
           <li>
             <button
               @click="filterProjects('all')"
-              class="block w-full text-left px-4 py-2 hover:bg-accent text-black dark:text-white"
+              class="block w-full text-left px-4 py-2 hover:bg-accent text-white"
               :class="[
                 selectedSkill === 'all'
                   ? 'bg-accent'
-                  : 'bg-light-tail-500 dark:bg-dark-navy-100',
+                  : 'bg-dark-navy-100',
               ]"
             >
               All
@@ -75,11 +75,11 @@ watch(selectedSkill, () => {
           >
             <button
               @click="filterProjects(projectSkill.id)"
-              class="block w-full text-left px-4 py-2 hover:bg-accent text-black dark:text-white"
+              class="block w-full text-left px-4 py-2 hover:bg-accent text-white"
               :class="[
                 selectedSkill == projectSkill.id
                   ? 'bg-accent'
-                  : 'bg-light-tail-500 dark:bg-dark-navy-100',
+                  : 'bg-dark-navy-100',
               ]"
             >
               {{ projectSkill.name }}
@@ -105,7 +105,7 @@ watch(selectedSkill, () => {
             :class="[
               selectedSkill === 'all'
                 ? 'bg-accent'
-                : 'bg-light-tail-500 dark:bg-dark-navy-100',
+                : 'bg-dark-navy-100',
             ]"
           >
             All
@@ -130,7 +130,7 @@ watch(selectedSkill, () => {
             :class="[
               selectedSkill == projectSkill.id
                 ? 'bg-accent'
-                : 'bg-light-tail-500 dark:bg-dark-navy-100',
+                : 'bg-dark-navy-100',
             ]"
           >
             {{ projectSkill.name }}

@@ -1,10 +1,5 @@
 <template>
-  <div class="bg-light-tail-100 dark:bg-dark-navy-500" v-motion :initial="{opacity:0,
-    y:100,
-    }"
-    :visible="{opacity:1,
-      y:0,
-    }" >
+  <div class="bg-dark-navy-500" >
     <div
       class="
         container
@@ -20,13 +15,18 @@
           text-3xl
           font-bold
           tracking-tight
-          text-light-tail-500
-          dark:text-dark-navy-100
+        text-dark-navy-100
           sm:text-4xl
         "
+        v-motion :initial="{opacity:0,
+    y:100,
+    }"
+    :visible="{opacity:1,
+      y:0,
+    }" 
       >
         <span class="block">Ready to dive in?</span>
-        <span class="block text-dark-primary dark:text-white"
+        <span class="block text-white"
           >Laravel 9 Admin Panel - Learn Roles and Permissions.</span
         >
       </h2>
@@ -40,16 +40,13 @@
               justify-center
               rounded-md
               border border-transparent
-              bg-light-secondary
-              dark:bg-dark-secondary
+              bg-dark-secondary
               px-5
               py-3
               text-base
               font-medium
-              text-dark-primary
-              dark:text-white
-              hover:bg-light-primary
-              dark:hover:bg-dark-primary
+              text-white
+              hover:bg-dark-primary
             "
             >Get the Course</a
           >

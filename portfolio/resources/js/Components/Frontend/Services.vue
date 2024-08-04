@@ -2,7 +2,7 @@
 
 </scrip>
 <template>
-  <section id="services" class="section bg-light-secondary dark:bg-dark-secondary">
+  <section id="services" class="section bg-dark-secondary">
     <div class="container mx-auto" v-motion :initial="{opacity:0,
     y:100,
     }"
@@ -17,7 +17,7 @@
         </p>
       </div>
       <div class="grid lg:grid-cols-4 gap-8">
-        <div class="bg-light-tail-100 dark:bg-dark-navy-500 p-6 rounded-2xl">
+        <div class="bg-dark-navy-500 p-6 rounded-2xl">
           <div
             class="
               text-accent
@@ -52,7 +52,7 @@
             perferendis volm quibusdam ullam qui dolore.
           </p>
         </div>
-        <div class="bg-light-tail-100 dark:bg-dark-navy-500 p-6 rounded-2xl">
+        <div class="bg-dark-navy-500 p-6 rounded-2xl">
           <div
             class="
               text-accent
@@ -92,7 +92,7 @@
             perferendis volm quibusdam ullam qui dolore.
           </p>
         </div>
-        <div class="bg-light-tail-100 dark:bg-dark-navy-500 p-6 rounded-2xl">
+        <div class="bg-dark-navy-500 p-6 rounded-2xl">
           <div
             class="
               text-accent
@@ -127,7 +127,7 @@
             perferendis volm quibusdam ullam qui dolore.
           </p>
         </div>
-        <div class="bg-light-tail-100 dark:bg-dark-navy-500 p-6 rounded-2xl">
+        <div class="bg-dark-navy-500 p-6 rounded-2xl">
           <div
             class="
               text-accent

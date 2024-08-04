@@ -34,7 +34,7 @@
                     </button>
                     <div class="pt-12">
                         <h5
-                            class="text-lg flex items-center text-black dark:text-white mb-2"
+                            class="text-lg flex items-centertext-white mb-2"
                         >
                             Follow me on.
                         </h5>

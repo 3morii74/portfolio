@@ -5,7 +5,7 @@ defineProps({
 </script>
 
 <template>
-  <section class="bg-light-tail-100 dark:bg-dark-navy-500 py-16 overflow-hidden">
+  <section class="bg-dark-navy-500 py-16 overflow-hidden">
     <div class="container mx-auto relative">
       <div class="carousel-wrapper">
         <div class="carousel">
