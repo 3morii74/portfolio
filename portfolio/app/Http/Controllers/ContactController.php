@@ -6,36 +6,41 @@ use App\Http\Requests\ContactRequest;
 use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
-
+use Inertia\Inertia;
+use Exception;
 
 class ContactController extends Controller
 {
     public function __invoke(ContactRequest $request)
     {
-        // Debugging: Log the request data
         Log::info('Request Data:', $request->all());
 
-        // Increase maximum execution time to 1000 seconds (if needed)
         ini_set('max_execution_time', 1000);
 
-        // Retrieve validated data
         $name = $request->input('name');
         $email = $request->input('email');
         $body = $request->input('body');
 
-        // Check if all fields are populated
-        if (empty($name) || empty($email) || empty($body)) {
-            return redirect()->back()->withErrors(['error' => 'All fields are required.']);
-        }
-
-        // Sending the email
         try {
+            Log::info('Attempting to send email to: omerahmed200237@gmail.com');
+            Log::info('Flash message set:', ['flash' => session('flash')]);
+
             Mail::to('omerahmed200237@gmail.com')->send(new ContactMail($name, $email, $body));
-        } catch (\Exception $e) {
+            Log::info('Email sent successfully.');
+            return redirect()->back()->with([
+
+                'type' => 'success',
+                'message' => 'Your message has been sent successfully.'
+
+            ]);
+        } catch (Exception $e) {
             Log::error('Mail sending failed: ' . $e->getMessage());
-            return redirect()->back()->withErrors(['error' => 'Failed to send email. Please try again later.']);
+            return redirect()->back()->with([
+
+                'type' => 'error',
+                'message' => 'Failed to send email. Please try again later.'
+
+            ])->withInput();
         }
-        // Redirecting back with success message
-        return redirect()->back()->with('success', 'Your message has been sent successfully!');
     }
 }
