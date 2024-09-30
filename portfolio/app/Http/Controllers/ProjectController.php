@@ -62,7 +62,7 @@ class ProjectController extends Controller
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })
-                ->encode('jpg', 65);
+                ->encode('jpg');
 
             $imagePath = 'skills/' . uniqid() . '.jpg';
             Storage::put($imagePath, (string) $image);
@@ -116,11 +116,11 @@ class ProjectController extends Controller
                 Storage::delete($imagePath);
 
                 $image = Image::make($request->file('image'))
-                    ->resize(300,200, function ($constraint) {
+                    ->resize(300, 200, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })
-                    ->encode('jpg', 65);
+                    ->encode('jpg');
 
                 $imagePath = 'skills/' . uniqid() . '.jpg';
                 Storage::put($imagePath, (string) $image);
