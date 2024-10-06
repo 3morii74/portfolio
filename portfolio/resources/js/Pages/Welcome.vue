@@ -16,7 +16,9 @@ defineProps({
 </script>
 
 <template>
-  <Head title="Welcome to portfolio" />
+  <Head title="OmarAhmed"  >
+    <link rel="icon" href="https://github.com/3morii74/portfolio/blob/main/OO.png?raw=true">
+  </Head>
   <FrontendLayout>
     <!-- Hero primary -->
     <Hero />

@@ -17,7 +17,7 @@
           <img
             class="h-8 w-auto"
             src="https://github.com/3morii74/portfolio/blob/main/OO.png?raw=true"
-            alt="Laraveller.com"
+            alt=""
           />
         </div>
         <p class="text-paragraph opacity-80 text-[15px]">
